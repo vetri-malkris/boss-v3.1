@@ -1,0 +1,74 @@
+<nav class="sidebar" [class.sidebar--collapsed]="collapsed()">
+  <button
+    type="button"
+    class="toggle"
+    (click)="toggleCollapsed()"
+    [matTooltip]="collapsed() ? 'Expand menu' : 'Collapse menu'"
+    matTooltipPosition="right"
+  >
+    <mat-icon>{{ collapsed() ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+  </button>
+
+  <button
+    type="button"
+    class="overview"
+    [class.overview--active]="selected() === null"
+    (click)="selectOverview()"
+    [matTooltip]="collapsed() ? 'Overview' : ''"
+    matTooltipPosition="right"
+  >
+    <mat-icon>space_dashboard</mat-icon>
+    @if (!collapsed()) {
+      <span>Overview</span>
+    }
+  </button>
+
+  @if (collapsed()) {
+    <ul class="rail">
+      @for (category of visibleCategories(); track category.code) {
+        <li>
+          <button type="button" class="rail__item" (click)="expandTo(category)" [matTooltip]="category.label" matTooltipPosition="right">
+            <mat-icon>{{ categoryIcons[category.code] }}</mat-icon>
+          </button>
+        </li>
+      }
+    </ul>
+  } @else {
+    <mat-accordion class="accordion">
+      @for (category of visibleCategories(); track category.code) {
+        <mat-expansion-panel
+          class="category"
+          [expanded]="openCategory() === category.code"
+          (opened)="openCategory.set(category.code)"
+          (closed)="onCategoryClosed(category.code)"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title class="category__title">
+              <mat-icon class="category__icon">{{ categoryIcons[category.code] }}</mat-icon>
+              {{ category.label }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <ul class="subcategories">
+            @for (sub of category.subcategories; track sub.code) {
+              <li>
+                <button
+                  type="button"
+                  class="subcategory"
+                  [class.subcategory--active]="selected() === sub.code"
+                  (click)="select(sub.code)"
+                >
+                  {{ sub.label }}
+                </button>
+              </li>
+            }
+          </ul>
+        </mat-expansion-panel>
+      }
+    </mat-accordion>
+
+    @if (visibleCategories().length === 0) {
+      <p class="empty">No menu access assigned yet. Ask your admin to grant access.</p>
+    }
+  }
+</nav>

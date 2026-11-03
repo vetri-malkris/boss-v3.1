@@ -1,0 +1,52 @@
+<form class="form" (ngSubmit)="submit()">
+  @if (errorMessage(); as message) {
+    <p class="error">{{ message }}</p>
+  }
+  @if (justSaved()) {
+    <p class="saved">Saved.</p>
+  }
+
+  <div class="grid">
+    @for (field of schema().fields; track field.name) {
+      <div class="field">
+        <mat-datepicker #picker></mat-datepicker>
+        <div class="field__header">
+          <span class="field__label">{{ field.label }}{{ field.required ? ' *' : '' }}</span>
+          @if (field.type === 'DATE') {
+            <mat-datepicker-toggle class="field__date-toggle" [for]="picker"></mat-datepicker-toggle>
+          }
+        </div>
+        <div class="field__value">
+          @switch (field.type) {
+            @case ('ENUM') {
+              <mat-select class="field__control" [ngModel]="valueOf(field)" [ngModelOptions]="{ standalone: true }" (ngModelChange)="setValue(field, $event)">
+                @for (option of field.options; track option) {
+                  <mat-option [value]="option">{{ option }}</mat-option>
+                }
+              </mat-select>
+            }
+            @case ('DATE') {
+              <input class="field__control" [matDatepicker]="picker" [ngModel]="dateValueOf(field)" [ngModelOptions]="{ standalone: true }" (ngModelChange)="setDateValue(field, $event)" />
+            }
+            @case ('NUMBER') {
+              <input class="field__control" type="number" [ngModel]="valueOf(field)" [ngModelOptions]="{ standalone: true }" (ngModelChange)="setValue(field, $event)" />
+            }
+            @default {
+              <input class="field__control" type="text" [ngModel]="valueOf(field)" [ngModelOptions]="{ standalone: true }" (ngModelChange)="setValue(field, $event)" />
+            }
+          }
+        </div>
+      </div>
+    }
+  </div>
+
+  <button mat-flat-button color="primary" type="submit" [disabled]="!canSubmit() || submitting()">
+    @if (submitting()) {
+      <mat-spinner diameter="20" />
+    } @else if (isEditing()) {
+      Save changes
+    } @else {
+      Add record
+    }
+  </button>
+</form>

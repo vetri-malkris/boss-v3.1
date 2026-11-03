@@ -1,0 +1,1 @@
+package com.boss.businessmodel.repository; import com.boss.businessmodel.domain.BusinessModel; import org.springframework.data.jpa.repository.JpaRepository; import java.util.*; public interface BusinessModelRepository extends JpaRepository<BusinessModel,UUID>{List<BusinessModel> findByTenantId(UUID tenantId);}

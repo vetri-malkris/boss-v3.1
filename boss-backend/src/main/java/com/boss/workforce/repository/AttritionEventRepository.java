@@ -1,0 +1,1 @@
+package com.boss.workforce.repository; import com.boss.workforce.domain.AttritionEvent; import org.springframework.data.jpa.repository.JpaRepository; import java.util.*; public interface AttritionEventRepository extends JpaRepository<AttritionEvent,UUID>{List<AttritionEvent> findByTenantId(UUID tenantId);}

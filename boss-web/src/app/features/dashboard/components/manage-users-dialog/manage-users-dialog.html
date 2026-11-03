@@ -1,0 +1,94 @@
+<h2 mat-dialog-title>
+  @if (mode() === 'list') { Manage users }
+  @else if (mode() === 'create') { Create user }
+  @else { Edit access: {{ selectedUser()?.fullName }} }
+</h2>
+
+<mat-dialog-content class="dialog">
+  @if (errorMessage(); as message) {
+    <p class="error">{{ message }}</p>
+  }
+
+  @if (mode() === 'list') {
+    @if (loading()) {
+      <mat-spinner diameter="28" />
+    } @else {
+      <ul class="users">
+        @for (user of users(); track user.id) {
+          <li class="user">
+            <div class="user__info">
+              <span class="user__name">{{ user.fullName }}</span>
+              <span class="user__email">{{ user.email }}</span>
+              <div class="user__roles">
+                @for (role of user.roles; track role) {
+                  <mat-chip class="user__role-chip">{{ role }}</mat-chip>
+                }
+              </div>
+            </div>
+            <button mat-stroked-button (click)="showAccess(user)">Edit access</button>
+          </li>
+        }
+      </ul>
+    }
+  }
+
+  @if (mode() === 'create') {
+    <form [formGroup]="createForm" class="form">
+      <mat-form-field appearance="outline" class="field">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="field">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="field">
+        <mat-label>Full name</mat-label>
+        <input matInput formControlName="fullName" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="field">
+        <mat-label>Roles</mat-label>
+        <mat-select formControlName="roles" multiple>
+          @for (role of assignableRoles; track role) {
+            <mat-option [value]="role">{{ role }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <p class="section-label">Menu access</p>
+      <app-subcategory-picker
+        [taxonomy]="taxonomy()"
+        (selectionChange)="createSelection.set($event)"
+        (validChange)="createSelectionValid.set($event)"
+      />
+    </form>
+  }
+
+  @if (mode() === 'access') {
+    <p class="section-label">Menu access</p>
+    <app-subcategory-picker
+      [taxonomy]="taxonomy()"
+      [initialSelection]="selectedUser()?.enabledSubcategories ?? []"
+      (selectionChange)="accessSelection.set($event)"
+      (validChange)="accessSelectionValid.set($event)"
+    />
+  }
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  @if (mode() === 'list') {
+    <button mat-flat-button color="primary" (click)="showCreate()">Create user</button>
+  }
+  @if (mode() === 'create') {
+    <button mat-button type="button" (click)="showList()" [disabled]="submitting()">Cancel</button>
+    <button mat-flat-button color="primary" (click)="submitCreate()" [disabled]="submitting() || !createSelectionValid()">
+      @if (submitting()) { <mat-spinner diameter="20" /> } @else { Create }
+    </button>
+  }
+  @if (mode() === 'access') {
+    <button mat-button type="button" (click)="showList()" [disabled]="submitting()">Cancel</button>
+    <button mat-flat-button color="primary" (click)="submitAccess()" [disabled]="submitting() || !accessSelectionValid()">
+      @if (submitting()) { <mat-spinner diameter="20" /> } @else { Save access }
+    </button>
+  }
+</mat-dialog-actions>

@@ -1,0 +1,128 @@
+:host {
+  display: block;
+}
+
+.panel {
+  padding: 1.1rem 1.25rem;
+}
+
+.panel__title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--neu-text-secondary);
+  margin-bottom: 0.9rem;
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.75rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  width: 100%;
+  padding: 0.55rem 0.8rem;
+  background: var(--neu-bg);
+  border-radius: var(--neu-radius-sm);
+  box-shadow: var(--neu-shadow-inset-sm);
+}
+
+.field__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.field__label {
+  font-size: 0.78rem;
+  color: var(--neu-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.field__value {
+  display: flex;
+}
+
+.field__control {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--neu-text);
+  padding: 0;
+}
+
+.run {
+  margin-top: 0.25rem;
+}
+
+.error {
+  color: var(--neu-danger);
+  font-size: 0.85rem;
+  margin: 0.75rem 0 0;
+}
+
+.panel__note {
+  margin: 0.9rem 0 0;
+  font-size: 0.8rem;
+  color: var(--neu-text-muted);
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  padding-top: 0.75rem;
+}
+
+.comparison {
+  margin-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  padding-top: 0.9rem;
+}
+
+.comparison__header,
+.comparison__row {
+  display: grid;
+  grid-template-columns: 1fr 100px 100px;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 0.82rem;
+  padding: 0.4rem 0;
+}
+
+.comparison__col-label {
+  color: var(--neu-text-muted);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-align: right;
+}
+
+.comparison__row {
+  box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.05);
+  color: var(--neu-text-secondary);
+}
+
+.comparison__row span:nth-child(2),
+.comparison__row span:nth-child(3) {
+  text-align: right;
+  color: var(--neu-text);
+  font-weight: 600;
+}
+
+.value--up {
+  color: var(--neu-success) !important;
+}
+
+.value--down {
+  color: var(--neu-danger) !important;
+}

@@ -1,0 +1,3 @@
+model_id,name,revenue_type,primary_revenue_driver,kpis,revenue_formula,cost_formula
+BM-SAAS,SaaS,RECURRING,SUBSCRIPTION,"MRR,ARR,NRR,CHURN,ARPU",CUSTOMERS*ARPU,HEADCOUNT*COMPENSATION
+BM-MFG,Manufacturing,PRODUCT,PRODUCT_SALES,"Revenue,COGS,GrossMargin,InventoryTurns,Capacity",UNITS*PRICE,MATERIAL+LABOUR+OVERHEAD

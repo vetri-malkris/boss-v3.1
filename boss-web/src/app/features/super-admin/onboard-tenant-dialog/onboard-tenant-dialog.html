@@ -1,0 +1,57 @@
+<h2 mat-dialog-title>New client</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form" class="form">
+    <div class="field">
+      <div class="field__header">
+        <span class="field__label">Company / tenant name</span>
+      </div>
+      <div class="field__value">
+        <input class="field__control" formControlName="tenantName" />
+      </div>
+    </div>
+    <div class="field">
+      <div class="field__header">
+        <span class="field__label">Workspace slug</span>
+      </div>
+      <div class="field__value">
+        <input class="field__control" formControlName="tenantSlug" placeholder="acme-manufacturing" />
+      </div>
+    </div>
+    <div class="field">
+      <div class="field__header">
+        <span class="field__label">CEO full name</span>
+      </div>
+      <div class="field__value">
+        <input class="field__control" formControlName="adminFullName" />
+      </div>
+    </div>
+    <div class="field">
+      <div class="field__header">
+        <span class="field__label">CEO email</span>
+      </div>
+      <div class="field__value">
+        <input class="field__control" type="email" formControlName="adminEmail" autocomplete="email" />
+      </div>
+    </div>
+    <div class="field">
+      <div class="field__header">
+        <span class="field__label">CEO password</span>
+      </div>
+      <div class="field__value">
+        <input class="field__control" type="password" formControlName="adminPassword" autocomplete="new-password" />
+      </div>
+    </div>
+  </form>
+
+  @if (errorMessage(); as message) {
+    <p class="error">{{ message }}</p>
+  }
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button type="button" (click)="cancel()" [disabled]="submitting()">Cancel</button>
+  <button mat-flat-button color="primary" (click)="submit()" [disabled]="submitting()">
+    @if (submitting()) { <mat-spinner diameter="20" /> } @else { Create client }
+  </button>
+</mat-dialog-actions>

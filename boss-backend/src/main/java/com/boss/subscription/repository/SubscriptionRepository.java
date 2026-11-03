@@ -1,0 +1,1 @@
+package com.boss.subscription.repository; import com.boss.subscription.domain.Subscription; import org.springframework.data.jpa.repository.JpaRepository; import java.util.*; public interface SubscriptionRepository extends JpaRepository<Subscription,UUID>{Optional<Subscription> findFirstByTenantIdAndActiveTrueOrderByExpiresAtDesc(UUID tenantId);}

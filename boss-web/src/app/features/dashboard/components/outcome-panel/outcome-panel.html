@@ -1,0 +1,28 @@
+<mat-card class="panel">
+  <span class="panel__title">
+    <mat-icon>assessment</mat-icon>
+    Outcomes
+  </span>
+
+  @if (completed().length === 0) {
+    <p class="panel__empty">No completed actions yet - outcomes appear here once an action is marked complete.</p>
+  } @else {
+    <ul class="list">
+      @for (action of completed(); track action.id) {
+        <li class="item">
+          <p class="item__description">{{ action.description }}</p>
+          <div class="item__figures">
+            <span>Expected: {{ action.expectedOutcomeMetric }} {{ action.expectedOutcomeValue | number: '1.2-2' }}</span>
+            <span>Actual: {{ action.actualOutcomeValue | number: '1.2-2' }}</span>
+            <span [class.variance--up]="(action.variance ?? 0) >= 0" [class.variance--down]="(action.variance ?? 0) < 0">
+              Variance: {{ action.variance | number: '1.2-2' }}
+            </span>
+          </div>
+          @if (action.outcomeReason) {
+            <p class="item__reason">{{ action.outcomeReason }}</p>
+          }
+        </li>
+      }
+    </ul>
+  }
+</mat-card>

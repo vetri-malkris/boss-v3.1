@@ -1,0 +1,16 @@
+spring:
+  flyway:
+    enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+boss:
+  security:
+    jwt:
+      secret: test-only-secret-not-used-outside-automated-tests-32chars+
+
+logging:
+  level:
+    root: WARN
+    com.boss: DEBUG

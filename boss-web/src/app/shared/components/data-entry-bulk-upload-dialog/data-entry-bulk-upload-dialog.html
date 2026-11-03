@@ -1,0 +1,77 @@
+<h2 mat-dialog-title>Upload</h2>
+
+<mat-dialog-content class="dialog">
+  <button mat-stroked-button class="template-button" [disabled]="downloadingTemplate()" (click)="downloadTemplate()">
+    @if (downloadingTemplate()) {
+      <mat-spinner diameter="18" />
+    } @else {
+      <mat-icon>description</mat-icon>
+    }
+    Download sample template
+  </button>
+
+  <mat-card
+    class="dropzone"
+    [class.dropzone--active]="dragOver()"
+    (click)="openFilePicker()"
+    (drop)="onDrop($event)"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave()"
+  >
+    <input #fileInput type="file" hidden accept=".csv,.xlsx,.xls" (change)="onFileInputChange($event)" />
+
+    @if (selectedFile(); as file) {
+      <mat-icon class="dropzone__icon">description</mat-icon>
+      <p class="dropzone__filename">{{ file.name }}</p>
+      <p class="dropzone__hint">Click to choose a different file</p>
+    } @else {
+      <mat-icon class="dropzone__icon">upload_file</mat-icon>
+      <p class="dropzone__hint">Drag & drop a .csv or .xlsx file here, or click to choose one</p>
+    }
+  </mat-card>
+
+  <p class="format-hint">
+    Expected columns (any order):
+    @for (field of data.schema.fields; track field.name) {
+      <code>{{ field.name }}</code
+      >@if (field.required) {
+        *
+      }
+      {{ ' ' }}
+    }
+  </p>
+
+  @if (errorMessage(); as message) {
+    <p class="error">{{ message }}</p>
+  }
+
+  @if (rowsCreated(); as count) {
+    <p class="success">
+      <mat-icon>check_circle</mat-icon>
+      @if (warnings().length > 0) {
+        {{ count }} row(s) created, {{ warnings().length }} skipped.
+      } @else {
+        {{ count }} row(s) created.
+      }
+    </p>
+  }
+
+  @if (warnings().length > 0) {
+    <ul class="warnings">
+      @for (warning of warnings(); track warning) {
+        <li>{{ warning }}</li>
+      }
+    </ul>
+  }
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()" [disabled]="uploading()">Close</button>
+  <button mat-flat-button color="primary" [disabled]="!selectedFile() || uploading()" (click)="upload()">
+    @if (uploading()) {
+      <mat-spinner diameter="20" />
+    } @else {
+      Upload
+    }
+  </button>
+</mat-dialog-actions>

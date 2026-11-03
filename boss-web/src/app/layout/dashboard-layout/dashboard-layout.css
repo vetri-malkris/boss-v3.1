@@ -1,0 +1,47 @@
+/*
+ * App-shell layout: the header stays put, and the sidebar + content below it are
+ * two independent scroll regions (each min-height: 0 so flexbox lets them shrink
+ * and scroll internally instead of growing the whole page). Scrolling inside the
+ * sidebar never bleeds into the main content or the page itself.
+ */
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.body {
+  display: flex;
+  align-items: stretch;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.content {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+@media (max-width: 760px) {
+  :host {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .body {
+    flex-direction: column;
+  }
+
+  .content {
+    overflow-y: visible;
+  }
+}

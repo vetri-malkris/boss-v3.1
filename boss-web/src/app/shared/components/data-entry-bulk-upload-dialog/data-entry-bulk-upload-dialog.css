@@ -1,0 +1,83 @@
+.dialog {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 360px;
+  max-width: 480px;
+}
+
+.template-button {
+  align-self: flex-start;
+}
+
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  border: 2px dashed rgba(0, 0, 0, 0.08);
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.dropzone--active {
+  border-color: var(--neu-primary);
+  background-color: rgba(2, 132, 199, 0.06);
+}
+
+.dropzone__icon {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.7;
+}
+
+.dropzone__filename {
+  font-weight: 600;
+  margin: 0;
+}
+
+.dropzone__hint {
+  margin: 0;
+  color: var(--neu-text-muted);
+  font-size: 0.85rem;
+}
+
+.format-hint {
+  font-size: 0.78rem;
+  color: var(--neu-text-muted);
+  margin: 0;
+}
+
+.format-hint code {
+  background: rgba(0, 0, 0, 0.06);
+  padding: 0 0.3rem;
+  border-radius: 3px;
+}
+
+.error {
+  color: var(--neu-danger);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.success {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--neu-success);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.warnings {
+  margin: 0;
+  padding-left: 1.1rem;
+  max-height: 140px;
+  overflow-y: auto;
+  font-size: 0.78rem;
+  color: var(--neu-warning);
+}

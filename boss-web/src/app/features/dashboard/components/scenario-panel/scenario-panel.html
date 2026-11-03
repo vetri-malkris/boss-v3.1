@@ -1,0 +1,109 @@
+<mat-card class="panel">
+  <span class="panel__title">
+    <mat-icon>alt_route</mat-icon>
+    Scenario simulator
+  </span>
+
+  <div class="fields">
+    <div class="field">
+      <div class="field__header">
+        <span class="field__label">Revenue change (%)</span>
+      </div>
+      <div class="field__value">
+        <input class="field__control" type="number" [ngModel]="revenueChangePercent()" (ngModelChange)="revenueChangePercent.set($event)" />
+      </div>
+    </div>
+    <div class="field">
+      <div class="field__header">
+        <span class="field__label">Expense change (%)</span>
+      </div>
+      <div class="field__value">
+        <input class="field__control" type="number" [ngModel]="expenseChangePercent()" (ngModelChange)="expenseChangePercent.set($event)" />
+      </div>
+    </div>
+    <div class="field">
+      <div class="field__header">
+        <span class="field__label">Hiring (headcount)</span>
+      </div>
+      <div class="field__value">
+        <input class="field__control" type="number" min="0" [ngModel]="additionalHires()" (ngModelChange)="additionalHires.set($event)" />
+      </div>
+    </div>
+    <div class="field">
+      <div class="field__header">
+        <span class="field__label">Avg. monthly cost / hire</span>
+      </div>
+      <div class="field__value">
+        <input class="field__control" type="number" min="0" [ngModel]="avgMonthlyCostPerHire()" (ngModelChange)="avgMonthlyCostPerHire.set($event)" />
+      </div>
+    </div>
+  </div>
+
+  <button mat-flat-button color="primary" class="run" [disabled]="running()" (click)="runScenario()">
+    @if (running()) {
+      <mat-spinner diameter="20" />
+    } @else {
+      Run scenario
+    }
+  </button>
+
+  @if (errorMessage(); as message) {
+    <p class="error">{{ message }}</p>
+  }
+
+  @if (result(); as r) {
+    @if (!r.hasEnoughData) {
+      <p class="panel__note">Upload at least 3 months of data before running a scenario.</p>
+    } @else {
+      <div class="comparison">
+        <div class="comparison__header">
+          <span></span>
+          <span class="comparison__col-label">Base</span>
+          <span class="comparison__col-label">Scenario</span>
+        </div>
+
+        <div class="comparison__row">
+          <span>Profit (next mo.)</span>
+          <span [class.value--down]="r.base!.nextProfit < 0">{{ r.base!.nextProfit | number: '1.2-2' }}</span>
+          <span [class.value--down]="r.scenario!.nextProfit < 0" [class.value--up]="r.scenario!.nextProfit >= 0 && r.scenario!.nextProfit !== r.base!.nextProfit">
+            {{ r.scenario!.nextProfit | number: '1.2-2' }}
+          </span>
+        </div>
+
+        <div class="comparison__row">
+          <span>Margin (next mo.)</span>
+          <span>{{ r.base!.nextMargin | number: '1.1-1' }}%</span>
+          <span>{{ r.scenario!.nextMargin | number: '1.1-1' }}%</span>
+        </div>
+
+        <div class="comparison__row">
+          <span>Runway</span>
+          <span>
+            @if (!r.base!.runway.available) { N/A }
+            @else if (r.base!.runway.monthsUntilExhausted != null) { {{ r.base!.runway.monthsUntilExhausted }}<span class="mn-suffix">&nbsp;Mth</span> }
+            @else { Sufficient }
+          </span>
+          <span>
+            @if (!r.scenario!.runway.available) { N/A }
+            @else if (r.scenario!.runway.monthsUntilExhausted != null) { {{ r.scenario!.runway.monthsUntilExhausted }}<span class="mn-suffix">&nbsp;Mth</span> }
+            @else { Sufficient }
+          </span>
+        </div>
+
+        <div class="comparison__row">
+          <span>Break-even</span>
+          <span>
+            @if (r.base!.breakEven.alreadyBreakEven) { Now }
+            @else if (r.base!.breakEven.period) { {{ r.base!.breakEven.period }} }
+            @else { Not within horizon }
+          </span>
+          <span>
+            @if (r.scenario!.breakEven.alreadyBreakEven) { Now }
+            @else if (r.scenario!.breakEven.period) { {{ r.scenario!.breakEven.period }} }
+            @else { Not within horizon }
+          </span>
+        </div>
+      </div>
+    }
+  }
+</mat-card>

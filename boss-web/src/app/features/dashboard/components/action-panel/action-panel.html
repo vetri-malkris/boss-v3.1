@@ -1,0 +1,50 @@
+<mat-card class="panel">
+  <span class="panel__title">
+    <mat-icon>task_alt</mat-icon>
+    Actions
+  </span>
+
+  @if (errorMessage(); as message) {
+    <p class="error">{{ message }}</p>
+  }
+
+  @if (actions().length === 0) {
+    <p class="panel__empty">No actions yet. Propose one from a recommendation above.</p>
+  } @else {
+    <ul class="list">
+      @for (action of actions(); track action.id) {
+        <li class="item">
+          <div class="item__row">
+            <span class="status" [class]="'status--' + action.status.toLowerCase()">{{ action.status.replace('_', ' ') }}</span>
+            <span class="item__source">from: {{ action.recommendationIssue }}</span>
+          </div>
+          <p class="item__description" [innerHTML]="action.description | compactNumbersInText"></p>
+          <p class="item__expected">
+            Expected: {{ action.expectedOutcomeMetric }} changes by
+            <app-compact-amount-display [value]="action.expectedOutcomeValue" />
+          </p>
+
+          @if (action.status === 'PENDING_APPROVAL' && canApprove) {
+            <div class="item__actions">
+              <button mat-stroked-button color="primary" (click)="approve(action)">Approve</button>
+              <button mat-stroked-button color="warn" (click)="reject(action)">Reject</button>
+            </div>
+          }
+          @if (action.status === 'APPROVED' && canApprove) {
+            <div class="item__actions">
+              <button mat-stroked-button (click)="start(action)">Start</button>
+              <button mat-stroked-button color="primary" (click)="complete(action)">Complete</button>
+              <button mat-stroked-button color="warn" (click)="cancel(action)">Cancel</button>
+            </div>
+          }
+          @if (action.status === 'IN_PROGRESS' && canApprove) {
+            <div class="item__actions">
+              <button mat-stroked-button color="primary" (click)="complete(action)">Complete</button>
+              <button mat-stroked-button color="warn" (click)="cancel(action)">Cancel</button>
+            </div>
+          }
+        </li>
+      }
+    </ul>
+  }
+</mat-card>

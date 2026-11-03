@@ -1,0 +1,8 @@
+<mat-card class="chart-card">
+  <span class="chart-card__title">Revenue / expense / profit trend</span>
+  @if (series().length > 0) {
+    <app-chart [option]="option()" class="chart-card__chart" />
+  } @else {
+    <p class="chart-card__empty">Not enough dated history to plot a trend yet.</p>
+  }
+</mat-card>

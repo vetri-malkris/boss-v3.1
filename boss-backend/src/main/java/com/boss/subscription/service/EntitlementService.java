@@ -1,0 +1,5 @@
+package com.boss.subscription.service;
+import com.boss.common.security.TenantContext; import com.boss.subscription.domain.*; import com.boss.subscription.repository.*; import org.springframework.stereotype.Service; import org.springframework.transaction.annotation.Transactional; import java.time.*;
+@Service public class EntitlementService { private final SubscriptionRepository subs; private final TokenTransactionRepository tx; public EntitlementService(SubscriptionRepository s,TokenTransactionRepository t){subs=s;tx=t;}
+ @Transactional public void consume(int tokens,String action,String reason){if(tokens<=0)return; var s=subs.findFirstByTenantIdAndActiveTrueOrderByExpiresAtDesc(TenantContext.requireTenantId()).orElseThrow(()->new IllegalStateException("No active subscription")); if(s.getExpiresAt().isBefore(Instant.now())){s.setActive(false);throw new IllegalStateException("Subscription expired");} s.consume(tokens); var t=new TokenTransaction(tokens,action,reason);t.setTenantId(TenantContext.requireTenantId());tx.save(t);}
+}

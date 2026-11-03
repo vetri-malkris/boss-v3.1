@@ -1,0 +1,59 @@
+<h2 mat-dialog-title>Upload {{ data.categoryLabel }} data</h2>
+
+<mat-dialog-content class="dialog">
+  <p class="intro">
+    Download the template below, fill in whichever sheets you have data for, and upload
+    it back. Every sheet becomes that subcategory's records in one go.
+  </p>
+
+  <button mat-stroked-button class="template-button" [disabled]="downloadingTemplate()" (click)="downloadTemplate()">
+    @if (downloadingTemplate()) {
+      <mat-spinner diameter="18" />
+    } @else {
+      <mat-icon>description</mat-icon>
+    }
+    Download sample template
+  </button>
+
+  <mat-card
+    class="dropzone"
+    [class.dropzone--active]="dragOver()"
+    (click)="openFilePicker()"
+    (drop)="onDrop($event)"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave()"
+  >
+    <input #fileInput type="file" hidden accept=".xlsx" (change)="onFileInputChange($event)" />
+
+    @if (selectedFile(); as file) {
+      <mat-icon class="dropzone__icon">description</mat-icon>
+      <p class="dropzone__filename">{{ file.name }}</p>
+      <p class="dropzone__hint">Click to choose a different file</p>
+    } @else {
+      <mat-icon class="dropzone__icon">upload_file</mat-icon>
+      <p class="dropzone__hint">Drag & drop the filled .xlsx template here, or click to choose it</p>
+    }
+  </mat-card>
+
+  @if (errorMessage(); as message) {
+    <p class="error">{{ message }}</p>
+  }
+
+  @if (result(); as r) {
+    <p class="success">
+      <mat-icon>check_circle</mat-icon>
+      {{ r.totalRecords }} record(s) created - refreshing your dashboard…
+    </p>
+  }
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()" [disabled]="uploading()">Cancel</button>
+  <button mat-flat-button color="primary" [disabled]="!selectedFile() || uploading()" (click)="upload()">
+    @if (uploading()) {
+      <mat-spinner diameter="20" />
+    } @else {
+      Upload
+    }
+  </button>
+</mat-dialog-actions>

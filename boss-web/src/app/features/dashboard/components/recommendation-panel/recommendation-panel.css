@@ -1,0 +1,79 @@
+:host {
+  display: block;
+}
+
+.panel {
+  padding: 1.1rem 1.25rem;
+}
+
+.panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.panel__title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--neu-text-secondary);
+}
+
+.panel__empty {
+  color: var(--neu-text-muted);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.error {
+  color: var(--neu-danger);
+  font-size: 0.85rem;
+  margin: 0 0 0.75rem;
+}
+
+.list {
+  background: transparent;
+}
+
+.item {
+  background: rgba(0, 0, 0, 0.03) !important;
+  color: var(--neu-text) !important;
+  margin-bottom: 0.4rem;
+}
+
+.item__title {
+  font-size: 0.85rem;
+  color: var(--neu-text) !important;
+}
+
+.item__confidence {
+  font-size: 0.72rem;
+  color: var(--neu-text-muted) !important;
+}
+
+.item__details {
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+.item__details dt {
+  color: var(--neu-text-muted);
+  margin-top: 0.6rem;
+}
+
+.item__details dd {
+  margin: 0.15rem 0 0;
+  color: var(--neu-text-secondary);
+}
+
+.item__details ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.propose {
+  margin-top: 0.9rem;
+}

@@ -1,0 +1,3 @@
+industry_id,name,operating_pattern,drivers,description
+IND-FOOD,Food Manufacturing,BATCH_PRODUCTION,"RAW_MATERIAL,PACKAGING,YIELD,QUALITY,WASTE",Food manufacturing
+IND-SW,Software,SUBSCRIPTION,"ARR,MRR,CHURN,NRR,ARPU",SaaS/software

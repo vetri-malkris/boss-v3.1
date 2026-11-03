@@ -1,0 +1,94 @@
+<mat-card class="panel">
+  <div class="panel__header">
+    <span class="panel__title">
+      <mat-icon>lightbulb</mat-icon>
+      Recommendations
+    </span>
+    <button mat-stroked-button (click)="generate()" [disabled]="generating()">
+      @if (generating()) {
+        <mat-spinner diameter="16" />
+      } @else {
+        Generate
+      }
+    </button>
+  </div>
+
+  @if (errorMessage(); as message) {
+    <p class="error">{{ message }}</p>
+  }
+
+  @if (!loading() && recommendations().length === 0) {
+    <p class="panel__empty">
+      No recommendations yet. Click Generate to derive recommendations from your current risks.
+    </p>
+  }
+
+  @if (recommendations().length > 0) {
+    <mat-accordion class="list">
+      @for (rec of recommendations(); track rec.id) {
+        <mat-expansion-panel class="item">
+          <mat-expansion-panel-header>
+            <mat-panel-title class="item__title">{{ rec.issue }}</mat-panel-title>
+            <mat-panel-description class="item__confidence">
+              confidence {{ rec.confidence | number: '1.0-2' }}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <dl class="item__details">
+            <dt>Root cause</dt>
+            <dd [innerHTML]="rec.rootCause | compactNumbersInText"></dd>
+            <dt>Impact</dt>
+            <dd [innerHTML]="rec.impact | compactNumbersInText"></dd>
+            <dt>Recommended action</dt>
+            <dd [innerHTML]="rec.recommendedAction | compactNumbersInText"></dd>
+            <dt>Expected outcome</dt>
+            <dd [innerHTML]="rec.expectedOutcome | compactNumbersInText"></dd>
+            <dt>Time horizon</dt>
+            <dd>{{ rec.timeHorizon }}</dd>
+
+            @if (rec.alternatives.length > 0) {
+              <dt>Alternatives</dt>
+              <dd>
+                <ul>
+                  @for (a of rec.alternatives; track a) {
+                    <li [innerHTML]="a | compactNumbersInText"></li>
+                  }
+                </ul>
+              </dd>
+            }
+
+            @if (rec.risks.length > 0) {
+              <dt>Risks of this action</dt>
+              <dd>
+                <ul>
+                  @for (r of rec.risks; track r) {
+                    <li [innerHTML]="r | compactNumbersInText"></li>
+                  }
+                </ul>
+              </dd>
+            }
+
+            @if (rec.assumptions.length > 0) {
+              <dt>Assumptions</dt>
+              <dd>
+                <ul>
+                  @for (a of rec.assumptions; track a) {
+                    <li [innerHTML]="a | compactNumbersInText"></li>
+                  }
+                </ul>
+              </dd>
+            }
+
+            <dt>Follow-up</dt>
+            <dd [innerHTML]="rec.followUpMeasurement | compactNumbersInText"></dd>
+          </dl>
+
+          <button mat-stroked-button class="propose" (click)="proposeAction(rec)">
+            <mat-icon>task_alt</mat-icon>
+            Propose action
+          </button>
+        </mat-expansion-panel>
+      }
+    </mat-accordion>
+  }
+</mat-card>

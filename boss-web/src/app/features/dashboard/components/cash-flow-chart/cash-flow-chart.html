@@ -1,0 +1,8 @@
+<mat-card class="chart-card">
+  <span class="chart-card__title">Cash flow trend</span>
+  @if (hasAnyRecordedBalance()) {
+    <app-chart [option]="option()" class="chart-card__chart" />
+  } @else {
+    <p class="chart-card__empty">No cash balance has been recorded yet - enter one on your next upload to see this trend.</p>
+  }
+</mat-card>

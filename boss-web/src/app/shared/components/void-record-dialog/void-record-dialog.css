@@ -1,0 +1,21 @@
+.dialog {
+  min-width: 360px;
+  max-width: 480px;
+}
+
+.hint {
+  font-size: 0.82rem;
+  color: var(--neu-text-muted);
+  margin: 0 0 0.75rem;
+  line-height: 1.5;
+}
+
+.field {
+  width: 100%;
+}
+
+.error {
+  color: var(--neu-danger);
+  font-size: 0.85rem;
+  margin: 0 0 0.75rem;
+}

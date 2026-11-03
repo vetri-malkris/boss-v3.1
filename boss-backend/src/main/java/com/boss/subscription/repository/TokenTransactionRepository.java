@@ -1,0 +1,1 @@
+package com.boss.subscription.repository; import com.boss.subscription.domain.TokenTransaction; import org.springframework.data.jpa.repository.JpaRepository; import java.util.*; public interface TokenTransactionRepository extends JpaRepository<TokenTransaction,UUID>{List<TokenTransaction> findByTenantIdOrderByCreatedAtDesc(UUID tenantId);}

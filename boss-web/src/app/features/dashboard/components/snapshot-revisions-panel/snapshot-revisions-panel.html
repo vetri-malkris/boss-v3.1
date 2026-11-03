@@ -1,0 +1,26 @@
+@if (loaded() && revisions().length > 0) {
+  <mat-card class="panel">
+    <span class="panel__title">
+      <mat-icon>history</mat-icon>
+      Data corrections
+    </span>
+    <p class="panel__hint">
+      A month's numbers were changed by a later re-upload. The figures below are what
+      that month showed <em>before</em> the correction - nothing is ever silently
+      overwritten.
+    </p>
+    <ul class="list">
+      @for (revision of revisions(); track revision.period + revision.revisedAt) {
+        <li class="item">
+          <span class="item__period">{{ revision.period }}</span>
+          <span class="item__detail">
+            was Revenue {{ revision.previousRevenue | number: '1.2-2' }},
+            Expenses {{ revision.previousExpenses | number: '1.2-2' }},
+            Profit {{ revision.previousProfit | number: '1.2-2' }}
+          </span>
+          <span class="item__date">corrected {{ revision.revisedAt | date: 'medium' }}</span>
+        </li>
+      }
+    </ul>
+  </mat-card>
+}

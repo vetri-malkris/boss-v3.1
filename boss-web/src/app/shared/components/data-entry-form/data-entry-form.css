@@ -1,0 +1,81 @@
+:host {
+  display: block;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  width: 100%;
+  padding: 0.55rem 0.8rem;
+  background: var(--neu-bg);
+  border-radius: var(--neu-radius-sm);
+  box-shadow: var(--neu-shadow-inset-sm);
+}
+
+.field__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.field__label {
+  font-size: 0.78rem;
+  color: var(--neu-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.field__date-toggle {
+  flex: none;
+  --mdc-icon-button-state-layer-size: 28px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+}
+
+.field__date-toggle .mat-mdc-button-touch-target {
+  width: 28px;
+  height: 28px;
+}
+
+.field__value {
+  display: flex;
+}
+
+.field__control {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--neu-text);
+  padding: 0;
+}
+
+mat-select.field__control {
+  cursor: pointer;
+}
+
+.error {
+  color: var(--neu-danger);
+  font-size: 0.85rem;
+  margin: 0 0 0.75rem;
+}
+
+.saved {
+  color: var(--neu-success);
+  font-size: 0.85rem;
+  margin: 0 0 0.75rem;
+}

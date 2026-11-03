@@ -1,0 +1,6 @@
+username,name,role,company_code
+admin@acme.test,Asha Admin,TENANT_ADMIN,ACME-001
+cfo@acme.test,Ravi CFO,CFO,ACME-001
+manager@acme.test,Meena Manager,MANAGER,ACME-001
+viewer@acme.test,Vijay Viewer,VIEWER,ACME-001
+saas.cfo@test,Nisha CFO,CFO,SAAS-001

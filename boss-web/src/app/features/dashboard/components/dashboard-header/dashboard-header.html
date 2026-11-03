@@ -1,0 +1,41 @@
+<mat-toolbar class="bar">
+  <span class="bar__brand">
+    <mat-icon>insights</mat-icon>
+    BOSS
+  </span>
+  @if (tenantName(); as name) {
+    <span class="bar__tenant">{{ name }}</span>
+  }
+
+  <span class="bar__spacer"></span>
+
+  <span
+    [matTooltip]="activeCategory() ? '' : 'Select a category or feature first'"
+    matTooltipPosition="below"
+  >
+    <button mat-flat-button color="primary" class="bar__upload" [disabled]="!activeCategory()" (click)="emitUploadData()">
+      <mat-icon>upload_file</mat-icon>
+      Upload data
+    </button>
+  </span>
+
+  @if (canManageUsers()) {
+    <button mat-stroked-button class="bar__users" (click)="manageUsers.emit()">
+      <mat-icon>group</mat-icon>
+      Manage users
+    </button>
+  }
+
+  @if (currentUser(); as user) {
+    <button mat-button [matMenuTriggerFor]="userMenu">
+      <mat-icon>account_circle</mat-icon>
+      {{ user.fullName }}
+    </button>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Sign out</span>
+      </button>
+    </mat-menu>
+  }
+</mat-toolbar>

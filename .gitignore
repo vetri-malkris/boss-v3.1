@@ -1,0 +1,24 @@
+# Environment
+.env
+.env.local
+
+# Backend (Maven)
+boss-backend/target/
+
+# Frontend (Angular/Node)
+boss-web/node_modules/
+boss-web/dist/
+boss-web/.angular/
+boss-web/npm-debug.log*
+boss-web/test-results/
+boss-web/playwright-report/
+
+# IDE
+.idea/
+*.iml
+.vscode/*
+!.vscode/extensions.json
+
+# OS
+.DS_Store
+Thumbs.db

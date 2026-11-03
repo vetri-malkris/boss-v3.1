@@ -1,0 +1,5 @@
+bill_id,supplier_id,supplier_name,bill_date,due_date,bill_amount,paid_amount,status,credit_days
+AP-001,SUP-001,Raw Materials Ltd,2026-08-01,2026-09-15,250000,0,OVERDUE,45
+AP-002,SUP-002,Packaging Co,2026-08-15,2026-09-29,180000,0,DUE_SOON,45
+AP-003,SUP-003,Logistics Ltd,2026-09-01,2026-10-16,120000,20000,PARTIAL,45
+AP-004,SUP-004,Equipment Co,2026-09-05,2026-10-20,300000,0,OPEN,45

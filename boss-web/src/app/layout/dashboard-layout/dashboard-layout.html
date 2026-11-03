@@ -1,0 +1,7 @@
+<app-dashboard-header [tenantName]="tenantName()" (uploadData)="uploadData.emit($event)" (manageUsers)="manageUsers.emit()" />
+<div class="body">
+  <app-sidebar />
+  <main class="content">
+    <ng-content />
+  </main>
+</div>

@@ -1,0 +1,21 @@
+<mat-card class="panel">
+  <div class="panel__header">
+    <span class="panel__title">
+      <mat-icon>edit_note</mat-icon>
+      Add a record
+    </span>
+    <button mat-stroked-button (click)="openBulkUpload()">
+      <mat-icon>upload_file</mat-icon>
+      Upload
+    </button>
+  </div>
+  <app-data-entry-form [schema]="schema()" (recordCreated)="onRecordCreated()" />
+</mat-card>
+
+<mat-card class="panel">
+  <span class="panel__title">
+    <mat-icon>table_rows</mat-icon>
+    Entered records
+  </span>
+  <app-data-entry-records [schema]="schema()" [refreshToken]="refreshToken()" />
+</mat-card>

@@ -1,0 +1,9 @@
+date,description,amount,type
+2026-01-05,Consulting invoice - Acme Retail,15000.00,INCOME
+2026-01-08,Product sales - January,8250.50,INCOME
+2026-01-10,Office rent,4000.00,EXPENSE
+2026-01-12,Software subscriptions,650.00,EXPENSE
+2026-01-15,Employee salaries,9200.00,EXPENSE
+2026-01-20,Consulting invoice - Beta Corp,6000.00,INCOME
+2026-01-22,Marketing spend,1200.00,EXPENSE
+2026-01-28,Utilities,340.75,EXPENSE

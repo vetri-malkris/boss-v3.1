@@ -1,0 +1,178 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import 'tailwindcss';
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+/* The "Mn" (millions) suffix wherever a large amount is compacted - on a tile
+ * (compact-amount-display) or inline in generated text (compactNumbersInText
+ * pipe) - always 3/4 the size of the number it follows. */
+.mn-suffix {
+  font-size: 0.75em;
+}
+
+/*
+ * Neumorphism design system (whole app, light mode). One flat off-white base
+ * color behind everything - every "raised" or "pressed" shape comes purely
+ * from a light/dark shadow pair on that same background (a darker warm-gray
+ * shadow + a pure-white highlight), never from a contrasting panel color or
+ * a hairline border. Components reference these tokens instead of
+ * hardcoding colors so the look stays consistent everywhere.
+ */
+:root {
+  --neu-bg: #e9edf3;
+  --neu-text: #202834;
+  --neu-text-secondary: #3d4759;
+  --neu-text-muted: #6b7686;
+  --neu-text-faint: #8994a3;
+  --neu-primary: #0284c7;
+
+  --neu-danger: #dc2626;
+  --neu-success: #15803d;
+  --neu-warning: #b45309;
+
+  --neu-radius-lg: 22px;
+  --neu-radius: 16px;
+  --neu-radius-sm: 10px;
+
+  --neu-shadow-raised: 8px 8px 18px rgba(163, 177, 198, 0.65), -8px -8px 18px rgba(255, 255, 255, 0.9);
+  --neu-shadow-raised-sm: 4px 4px 10px rgba(163, 177, 198, 0.55), -4px -4px 10px rgba(255, 255, 255, 0.85);
+  --neu-shadow-inset: inset 4px 4px 9px rgba(163, 177, 198, 0.6), inset -4px -4px 9px rgba(255, 255, 255, 0.85);
+  --neu-shadow-inset-sm: inset 3px 3px 6px rgba(163, 177, 198, 0.55), inset -3px -3px 6px rgba(255, 255, 255, 0.8);
+  --neu-shadow-flat: 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.neu-raised {
+  background: var(--neu-bg);
+  border-radius: var(--neu-radius);
+  box-shadow: var(--neu-shadow-raised);
+}
+
+.neu-raised-sm {
+  background: var(--neu-bg);
+  border-radius: var(--neu-radius-sm);
+  box-shadow: var(--neu-shadow-raised-sm);
+}
+
+.neu-inset {
+  background: var(--neu-bg);
+  border-radius: var(--neu-radius);
+  box-shadow: var(--neu-shadow-inset);
+}
+
+.neu-inset-sm {
+  background: var(--neu-bg);
+  border-radius: var(--neu-radius-sm);
+  box-shadow: var(--neu-shadow-inset-sm);
+}
+
+/* Material surfaces - restyled globally so every mat-card/dialog/menu/panel in
+   the app is neumorphic without needing per-component overrides. */
+.mat-mdc-card,
+.mat-mdc-dialog-container .mdc-dialog__surface,
+.mat-mdc-menu-panel,
+.mat-mdc-select-panel,
+.mat-mdc-autocomplete-panel,
+.mat-datepicker-content {
+  background: var(--neu-bg) !important;
+  border-radius: var(--neu-radius) !important;
+  box-shadow: var(--neu-shadow-raised) !important;
+  border: none !important;
+}
+
+.mat-toolbar {
+  background: var(--neu-bg) !important;
+  box-shadow: 0 6px 16px rgba(163, 177, 198, 0.5) !important;
+  border: none !important;
+}
+
+.mat-expansion-panel {
+  background: var(--neu-bg) !important;
+  box-shadow: none !important;
+  border-radius: var(--neu-radius-sm) !important;
+}
+
+.mat-mdc-raised-button:not(:disabled),
+.mat-mdc-unelevated-button:not(:disabled) {
+  --mdc-filled-button-container-color: var(--neu-bg);
+  box-shadow: var(--neu-shadow-raised-sm) !important;
+  border-radius: var(--neu-radius-sm) !important;
+}
+
+.mat-mdc-outlined-button:not(:disabled) {
+  box-shadow: var(--neu-shadow-raised-sm) !important;
+  border-radius: var(--neu-radius-sm) !important;
+  border-color: transparent !important;
+}
+
+.mat-mdc-icon-button {
+  box-shadow: var(--neu-shadow-raised-sm) !important;
+  border-radius: 50% !important;
+}
+
+.mat-mdc-chip {
+  box-shadow: var(--neu-shadow-raised-sm) !important;
+  border: none !important;
+}
+
+/* Outline shape must stay in sync with the wrapper's own border-radius below -
+   MDC sizes the notch's leading/trailing corner allowance from this variable,
+   so a mismatch is what makes the floating label clip into the rounded corner
+   or sit straddling the (invisible) outline edge instead of resting cleanly
+   inside the box. */
+.mat-mdc-form-field {
+  --mdc-outlined-text-field-container-shape: var(--neu-radius-sm);
+  --mat-form-field-container-vertical-padding: 12px;
+}
+
+.mat-mdc-form-field .mat-mdc-text-field-wrapper {
+  background: var(--neu-bg) !important;
+  border-radius: var(--neu-radius-sm) !important;
+  box-shadow: var(--neu-shadow-inset-sm) !important;
+}
+
+.mat-mdc-form-field .mdc-notched-outline__leading,
+.mat-mdc-form-field .mdc-notched-outline__notch,
+.mat-mdc-form-field .mdc-notched-outline__trailing {
+  border: none !important;
+}
+
+/* The floating label can visually sit over a mat-select's clickable center
+   (worse the longer the label text, e.g. "Capital type") and otherwise
+   intercepts the click meant for the select underneath it. */
+.mat-mdc-form-field .mdc-floating-label {
+  pointer-events: none !important;
+}
+
+/* Every field uses floatLabel="always" so the label sits in one fixed spot
+   consistently across the whole form. With the outline border hidden, that
+   floated label has nothing to visually "break" - it straddles the box's own
+   top edge (the inset-shadow curve) with no border there to justify it,
+   looking like it's cut by the line. Give the floated label its own matching
+   background so it reads as sitting cleanly inside the box instead. */
+.mat-mdc-form-field .mdc-floating-label--float-above {
+  background: var(--neu-bg);
+  padding: 0 4px;
+  border-radius: 4px;
+}
+
+.mat-mdc-form-field .mat-mdc-form-field-icon-suffix {
+  align-self: center;
+}
+
+.mdc-switch__track {
+  box-shadow: var(--neu-shadow-inset-sm) !important;
+}
+
+.mdc-checkbox__background {
+  box-shadow: var(--neu-shadow-raised-sm) !important;
+}
+

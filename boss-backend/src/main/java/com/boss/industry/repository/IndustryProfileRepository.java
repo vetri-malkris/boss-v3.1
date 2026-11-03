@@ -1,0 +1,1 @@
+package com.boss.industry.repository; import com.boss.industry.domain.IndustryProfile; import org.springframework.data.jpa.repository.JpaRepository; import java.util.*; public interface IndustryProfileRepository extends JpaRepository<IndustryProfile,UUID>{List<IndustryProfile> findByTenantId(UUID tenantId);}

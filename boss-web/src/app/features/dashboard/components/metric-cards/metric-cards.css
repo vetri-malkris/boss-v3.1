@@ -1,0 +1,54 @@
+:host {
+  display: block;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1rem;
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.4rem;
+  padding: 1.1rem 0.75rem;
+  background: var(--neu-bg);
+  border-radius: var(--neu-radius-sm);
+  box-shadow: var(--neu-shadow-inset-sm);
+  cursor: pointer;
+  transition: box-shadow 0.15s ease;
+}
+
+.metric:hover {
+  box-shadow: var(--neu-shadow-inset-sm), 0 0 0 1px var(--neu-text-faint);
+}
+
+.metric__label {
+  font-size: 0.78rem;
+  color: var(--neu-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.metric__value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--neu-text);
+}
+
+.metric__value--up {
+  color: var(--neu-success);
+}
+
+.metric__value--down {
+  color: var(--neu-danger);
+}
+
+.metric__value--muted {
+  font-size: 0.95rem;
+  color: var(--neu-text-faint);
+  font-weight: 400;
+}

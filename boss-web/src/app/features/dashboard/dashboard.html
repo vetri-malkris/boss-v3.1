@@ -1,0 +1,19 @@
+@if (isSuperAdmin()) {
+  <app-super-admin-panel />
+} @else {
+  <app-dashboard-layout
+    [tenantName]="dashboard()?.tenantName ?? null"
+    (uploadData)="openUploadDialog($event)"
+    (manageUsers)="openManageUsers()"
+  >
+    @if (loading()) {
+      <div class="loading">
+        <mat-spinner diameter="32" />
+      </div>
+    } @else if (dashboard(); as d) {
+      <app-category-content [subcategory]="selected()" [dashboard]="d" />
+
+      <app-ai-chat />
+    }
+  </app-dashboard-layout>
+}

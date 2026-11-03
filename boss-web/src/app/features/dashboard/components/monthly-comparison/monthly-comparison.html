@@ -1,0 +1,30 @@
+<mat-card class="panel">
+  <span class="panel__title">Monthly comparison</span>
+
+  @if (comparison(); as c) {
+    <p class="panel__subtitle">{{ c.currentPeriod }} vs {{ c.previousPeriod }}</p>
+    <ul class="rows">
+      @for (change of c.changes; track change.metric) {
+        <li class="row">
+          <span class="row__metric">{{ change.metric | titlecase }}</span>
+          <span class="row__values">
+            {{ change.currentValue | number: '1.2-2' }}
+            <span class="row__previous">(was {{ change.previousValue | number: '1.2-2' }})</span>
+          </span>
+          <span
+            class="row__change"
+            [class.row__change--up]="change.direction === 'INCREASE'"
+            [class.row__change--down]="change.direction === 'DECREASE'"
+          >
+            <mat-icon>
+              {{ change.direction === 'INCREASE' ? 'arrow_upward' : change.direction === 'DECREASE' ? 'arrow_downward' : 'remove' }}
+            </mat-icon>
+            {{ change.changePercentage | number: '1.1-1' }}%
+          </span>
+        </li>
+      }
+    </ul>
+  } @else {
+    <p class="panel__empty">Upload at least two months of data to see a comparison.</p>
+  }
+</mat-card>

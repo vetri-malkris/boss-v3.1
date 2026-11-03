@@ -1,0 +1,7 @@
+<h2 mat-dialog-title>Edit record</h2>
+<mat-dialog-content class="dialog">
+  <app-data-entry-form [schema]="data.schema" [editingRecord]="data.record" (recordUpdated)="onSaved()" />
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button type="button" (click)="close()">Cancel</button>
+</mat-dialog-actions>

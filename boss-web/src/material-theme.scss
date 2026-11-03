@@ -1,0 +1,50 @@
+// Include theming for Angular Material with `mat.theme()`.
+// This Sass mixin will define CSS variables that are used for styling Angular Material
+// components according to the Material 3 design spec.
+// Learn more about theming and how to use it for your application's
+// custom components at https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+
+html {
+  height: 100%;
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+}
+
+body {
+  // The whole app runs in light mode - flips every Material component
+  // (buttons, fields, menus, cards) to its light M3 variant automatically.
+  color-scheme: light;
+
+  // Neumorphism needs one flat base color behind everything - shapes read as
+  // "raised" or "pressed" purely from a light/dark shadow pair on that same
+  // color, not from contrast against a different-colored panel. Pulling
+  // Material's own surface tokens to the same value means mat-card/mat-toolbar/
+  // mat-dialog/etc. all sit on that same base automatically.
+  background-color: var(--neu-bg);
+  --mat-sys-surface: var(--neu-bg);
+  --mat-sys-surface-container: var(--neu-bg);
+  --mat-sys-surface-container-low: var(--neu-bg);
+  --mat-sys-surface-container-high: var(--neu-bg);
+  --mat-sys-surface-container-highest: var(--neu-bg);
+  --mat-sys-surface-dim: var(--neu-bg);
+  --mat-sys-surface-bright: var(--neu-bg);
+  --mat-sys-on-surface: var(--neu-text);
+  --mat-sys-on-surface-variant: var(--neu-text-muted);
+  --mat-sys-outline: transparent;
+  --mat-sys-outline-variant: transparent;
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+
+  // Reset the user agent margin.
+  margin: 0;
+  height: 100%;
+}

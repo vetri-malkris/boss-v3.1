@@ -1,0 +1,31 @@
+<div class="picker">
+  @for (category of taxonomy(); track category.code) {
+    <div class="category">
+      <div class="category__header">
+        <mat-slide-toggle
+          [checked]="isCategoryEnabled(category.code)"
+          (change)="toggleCategory(category, $event.checked)"
+        >
+          {{ category.label }}
+        </mat-slide-toggle>
+      </div>
+
+      @if (isCategoryEnabled(category.code)) {
+        <div class="subcategories">
+          @for (sub of category.subcategories; track sub.code) {
+            <mat-checkbox
+              [checked]="isSelected(sub.code)"
+              (change)="toggleSubcategory(sub.code, $event.checked)"
+            >
+              {{ sub.label }}
+            </mat-checkbox>
+          }
+        </div>
+
+        @if (isCategoryMissingASubcategory(category)) {
+          <p class="category__error">Pick at least one, or turn this category off.</p>
+        }
+      }
+    </div>
+  }
+</div>

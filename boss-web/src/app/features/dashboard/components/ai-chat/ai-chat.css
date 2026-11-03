@@ -1,0 +1,142 @@
+:host {
+  display: block;
+}
+
+.panel {
+  padding: 1.1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel__title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--neu-text-secondary);
+  margin-bottom: 0.75rem;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 420px;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.empty {
+  color: var(--neu-text-muted);
+  font-size: 0.85rem;
+}
+
+.message {
+  max-width: 85%;
+  padding: 0.6rem 0.85rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+}
+
+.message--user {
+  align-self: flex-end;
+  background: rgba(56, 189, 248, 0.12);
+  color: var(--neu-text);
+}
+
+.message--assistant {
+  align-self: flex-start;
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--neu-text);
+}
+
+.message__text {
+  margin: 0;
+}
+
+.evidence {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.evidence__chip {
+  font-size: 0.72rem !important;
+  min-height: 22px !important;
+  background: rgba(0, 0, 0, 0.06) !important;
+  color: var(--neu-text-secondary) !important;
+}
+
+.diagnosis {
+  margin-top: 0.6rem;
+  padding: 0.5rem 0.65rem;
+  border-left: 3px solid var(--neu-danger);
+  background: rgba(248, 113, 113, 0.08);
+  font-size: 0.8rem;
+}
+
+.diagnosis strong {
+  color: var(--neu-danger);
+}
+
+.diagnosis p {
+  margin: 0.25rem 0 0;
+  color: var(--neu-text-secondary);
+}
+
+.diagnosis__impact {
+  color: var(--neu-text-muted) !important;
+  font-size: 0.75rem;
+}
+
+.recommendation {
+  margin-top: 0.6rem;
+  padding: 0.5rem 0.65rem;
+  border-left: 3px solid var(--neu-success);
+  background: rgba(74, 222, 128, 0.06);
+  font-size: 0.8rem;
+}
+
+.recommendation__action {
+  margin: 0;
+  color: var(--neu-text-secondary);
+  font-weight: 600;
+}
+
+.recommendation__outcome {
+  margin: 0.2rem 0 0;
+  color: var(--neu-text-muted);
+}
+
+.recommendation__confidence {
+  display: inline-block;
+  margin-top: 0.3rem;
+  font-size: 0.72rem;
+  color: var(--neu-text-faint);
+}
+
+.suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.suggestion {
+  font-size: 0.75rem !important;
+  color: var(--neu-text-muted) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+.composer {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+.composer__field {
+  flex: 1 1 auto;
+}

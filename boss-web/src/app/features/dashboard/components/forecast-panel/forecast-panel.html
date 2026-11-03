@@ -1,0 +1,59 @@
+<mat-card class="panel">
+  <span class="panel__title">
+    <mat-icon>trending_up</mat-icon>
+    Forecast
+  </span>
+
+  @if (!forecast()?.hasEnoughData) {
+    <p class="panel__empty">Upload at least 3 months of data to see a forecast.</p>
+  } @else {
+    <p class="panel__subtitle">
+      Next {{ forecast()!.horizonMonths }} months, linear trend over your history
+    </p>
+
+    <div class="tiles">
+      <div class="tile">
+        <span class="tile__label">Revenue ({{ nextRevenue()?.period }})</span>
+        <span class="tile__value tile__value--up">{{ nextRevenue()?.value | number: '1.2-2' }}</span>
+      </div>
+      <div class="tile">
+        <span class="tile__label">Expense ({{ nextExpenses()?.period }})</span>
+        <span class="tile__value tile__value--down">{{ nextExpenses()?.value | number: '1.2-2' }}</span>
+      </div>
+      <div class="tile">
+        <span class="tile__label">Cash</span>
+        <span class="tile__value">
+          @if (forecast()!.cash) {
+            {{ forecast()!.cash!.points[0].value | number: '1.2-2' }}
+          } @else {
+            N/A
+          }
+        </span>
+      </div>
+      <div class="tile">
+        <span class="tile__label">Runway</span>
+        <span class="tile__value">
+          @if (!forecast()!.runway?.available) {
+            N/A
+          } @else if (forecast()!.runway!.monthsUntilExhausted != null) {
+            {{ forecast()!.runway!.monthsUntilExhausted }}<span class="mn-suffix">&nbsp;Mth</span>
+          } @else {
+            Sufficient
+          }
+        </span>
+      </div>
+      <div class="tile">
+        <span class="tile__label">Break-even</span>
+        <span class="tile__value">
+          @if (forecast()!.breakEven!.alreadyBreakEven) {
+            Now
+          } @else if (forecast()!.breakEven!.monthsFromNow != null) {
+            {{ forecast()!.breakEven!.period }}
+          } @else {
+            Not within horizon
+          }
+        </span>
+      </div>
+    </div>
+  }
+</mat-card>

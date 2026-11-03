@@ -1,0 +1,5 @@
+invoice_id,customer_id,customer_name,invoice_date,due_date,invoice_amount,paid_amount,status,credit_days
+AR-001,ACME-C001,Alpha Retail,2026-06-15,2026-07-30,150000,0,OPEN,45
+AR-002,ACME-C002,Beta Supermarket,2026-07-10,2026-08-24,200000,50000,PARTIAL,45
+AR-003,ACME-C003,Gamma Distributors,2026-08-01,2026-09-15,300000,0,OVERDUE,45
+AR-004,ACME-C004,Delta Foods,2026-09-01,2026-10-16,250000,0,OPEN,45

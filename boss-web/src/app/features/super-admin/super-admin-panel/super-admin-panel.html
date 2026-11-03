@@ -1,0 +1,97 @@
+<mat-toolbar class="bar">
+  <span class="bar__brand">
+    <mat-icon>insights</mat-icon>
+    BOSS
+  </span>
+  <span class="bar__tenant">Super Admin</span>
+
+  <span class="bar__spacer"></span>
+
+  @if (currentUser(); as user) {
+    <button mat-button [matMenuTriggerFor]="userMenu">
+      <mat-icon>account_circle</mat-icon>
+      {{ user.fullName }}
+    </button>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Sign out</span>
+      </button>
+    </mat-menu>
+  }
+</mat-toolbar>
+
+<div class="content">
+  <div class="stats">
+    <div class="stat">
+      <span class="stat__value">{{ tenants().length }}</span>
+      <span class="stat__label">Total clients</span>
+    </div>
+    <div class="stat">
+      <span class="stat__value stat__value--up">{{ activeCount() }}</span>
+      <span class="stat__label">Active</span>
+    </div>
+  </div>
+
+  <div class="content__header">
+    <div class="search">
+      <mat-icon class="search__icon">search</mat-icon>
+      <input
+        class="search__input"
+        type="text"
+        placeholder="Search clients by name or slug"
+        [ngModel]="search()"
+        (ngModelChange)="search.set($event)"
+      />
+    </div>
+    <button mat-flat-button color="primary" (click)="openOnboardDialog()">
+      <mat-icon>add_business</mat-icon>
+      New client
+    </button>
+  </div>
+
+  @if (loading()) {
+    <div class="loading">
+      <mat-spinner diameter="32" />
+    </div>
+  } @else if (tenants().length === 0) {
+    <mat-card class="empty">
+      <mat-icon class="empty__icon">domain_disabled</mat-icon>
+      <h2>No clients yet</h2>
+      <p>Create the first one with "New client" above - it creates the tenant and its CEO login in one step.</p>
+    </mat-card>
+  } @else if (filteredTenants().length === 0) {
+    <mat-card class="empty">
+      <mat-icon class="empty__icon">search_off</mat-icon>
+      <h2>No matches</h2>
+      <p>No client name or slug matches "{{ search() }}".</p>
+    </mat-card>
+  } @else {
+    <div class="tenants">
+      @for (tenant of filteredTenants(); track tenant.id) {
+        <mat-card class="tenant">
+          <div class="tenant__top">
+            <span class="tenant__avatar">{{ initialOf(tenant.name) }}</span>
+            <div class="tenant__heading">
+              <span class="tenant__name">{{ tenant.name }}</span>
+              <span class="tenant__slug">{{ tenant.slug }}</span>
+            </div>
+            <span class="tenant__status" [class.tenant__status--active]="tenant.status === 'ACTIVE'">
+              <span class="tenant__status-dot"></span>
+              {{ tenant.status }}
+            </span>
+          </div>
+
+          <span class="tenant__created">Created {{ tenant.createdAt | date: 'dd-MM-yyyy' }}</span>
+
+          <div class="tenant__actions">
+            <button mat-stroked-button (click)="openUsersDialog(tenant)">
+              <mat-icon>group</mat-icon>
+              Manage users
+            </button>
+          </div>
+        </mat-card>
+      }
+    </div>
+  }
+</div>

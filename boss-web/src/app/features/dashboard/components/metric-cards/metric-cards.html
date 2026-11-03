@@ -1,0 +1,138 @@
+<div class="metrics">
+  <mat-card class="metric" (click)="showTraceability('revenue')">
+    <span class="metric__label">Revenue</span>
+    <span class="metric__value metric__value--up">
+      @if (metrics().revenue != null) {
+        <app-compact-amount-display [value]="metrics().revenue!" />
+      } @else {
+        N/A
+      }
+    </span>
+  </mat-card>
+  <mat-card class="metric" (click)="showTraceability('expenses')">
+    <span class="metric__label">Expense</span>
+    <span class="metric__value metric__value--down">
+      @if (metrics().expenses != null) {
+        <app-compact-amount-display [value]="metrics().expenses!" />
+      } @else {
+        N/A
+      }
+    </span>
+  </mat-card>
+  <mat-card class="metric" (click)="showTraceability('profit')">
+    <span class="metric__label">{{ (metrics().profit ?? 0) < 0 ? 'Loss' : 'Profit' }}</span>
+    <span class="metric__value"
+      [class.metric__value--up]="metrics().profit != null && metrics().profit! >= 0"
+      [class.metric__value--down]="metrics().profit != null && metrics().profit! < 0">
+      @if (metrics().profit != null) {
+        <app-compact-amount-display [value]="metrics().profit!" />
+      } @else {
+        N/A
+      }
+    </span>
+  </mat-card>
+  <mat-card class="metric" (click)="showTraceability('margin')">
+    <span class="metric__label">Margin</span>
+    <span class="metric__value"
+      [class.metric__value--up]="metrics().margin != null && metrics().margin! >= 0"
+      [class.metric__value--down]="metrics().margin != null && metrics().margin! < 0">
+      @if (metrics().margin != null) {
+        {{ metrics().margin | number: '1.2-2' }}%
+      } @else {
+        N/A
+      }
+    </span>
+  </mat-card>
+  <mat-card class="metric" (click)="showTraceability('runwayMonths')">
+    <span class="metric__label">Runway</span>
+    <span class="metric__value">
+      @if (metrics().runwayMonths != null) {
+        {{ metrics().runwayMonths | number: '1.1-1' }}<span class="mn-suffix">&nbsp;Mth</span>
+      } @else {
+        N/A
+      }
+    </span>
+  </mat-card>
+  <mat-card class="metric" (click)="showTraceability('payables')">
+    <span class="metric__label">Payables</span>
+    <span class="metric__value">
+      @if (metrics().payables != null) {
+        <app-compact-amount-display [value]="metrics().payables!" />
+      } @else {
+        N/A
+      }
+    </span>
+  </mat-card>
+  <mat-card class="metric" (click)="showTraceability('receivables')">
+    <span class="metric__label">Receivables</span>
+    <span class="metric__value">
+      @if (metrics().receivables != null) {
+        <app-compact-amount-display [value]="metrics().receivables!" />
+      } @else {
+        N/A
+      }
+    </span>
+  </mat-card>
+  <mat-card class="metric" (click)="showTraceability('monthlyPeopleCost')">
+    <span class="metric__label">People cost</span>
+    <span class="metric__value">
+      @if (metrics().monthlyPeopleCost != null) {
+        <app-compact-amount-display [value]="metrics().monthlyPeopleCost!" />
+      } @else {
+        N/A
+      }
+    </span>
+  </mat-card>
+  <mat-card class="metric" (click)="showTraceability('cashBalance')">
+    <span class="metric__label">Cash</span>
+    <span class="metric__value">
+      @if (metrics().cashBalance != null) {
+        <app-compact-amount-display [value]="metrics().cashBalance!" />
+      } @else {
+        N/A
+      }
+    </span>
+  </mat-card>
+  <mat-card class="metric" (click)="showTraceability('netCashFlow')">
+    <span class="metric__label">Net cash flow</span>
+    <span class="metric__value"
+      [class.metric__value--up]="metrics().netCashFlow != null && metrics().netCashFlow! >= 0"
+      [class.metric__value--down]="metrics().netCashFlow != null && metrics().netCashFlow! < 0">
+      @if (metrics().netCashFlow != null) {
+        <app-compact-amount-display [value]="metrics().netCashFlow!" />
+      } @else {
+        N/A
+      }
+    </span>
+  </mat-card>
+  <mat-card class="metric" (click)="showTraceability('outputGst')">
+    <span class="metric__label">Output GST</span>
+    <span class="metric__value">
+      @if (metrics().outputGst != null) {
+        <app-compact-amount-display [value]="metrics().outputGst!" />
+      } @else {
+        N/A
+      }
+    </span>
+  </mat-card>
+  <mat-card class="metric" (click)="showTraceability('inputGst')">
+    <span class="metric__label">Input GST (ITC)</span>
+    <span class="metric__value">
+      @if (metrics().inputGst != null) {
+        <app-compact-amount-display [value]="metrics().inputGst!" />
+      } @else {
+        N/A
+      }
+    </span>
+  </mat-card>
+  <mat-card class="metric" (click)="showTraceability('gstLiability')">
+    <span class="metric__label">GST liability</span>
+    <span class="metric__value">
+      @if (metrics().gstLiability != null) {
+        <app-compact-amount-display [value]="metrics().gstLiability!" />
+      } @else {
+        N/A
+      }
+    </span>
+  </mat-card>
+</div>

@@ -1,0 +1,69 @@
+<mat-card class="panel">
+  <span class="panel__title">
+    <mat-icon>smart_toy</mat-icon>
+    AI CFO
+  </span>
+
+  <div class="messages">
+    @if (messages().length === 0) {
+      <p class="empty">Ask BOSS anything about your business…</p>
+    }
+    @for (message of messages(); track $index) {
+      <div class="message" [class]="'message--' + message.role">
+        <p class="message__text">{{ message.text }}</p>
+
+        @if (message.response; as r) {
+          @if (r.evidence.length > 0) {
+            <div class="evidence">
+              @for (item of r.evidence; track item.label) {
+                <mat-chip class="evidence__chip">{{ item.label }}: {{ item.value }}</mat-chip>
+              }
+            </div>
+          }
+
+          @if (r.diagnosis; as d) {
+            <div class="diagnosis">
+              <strong>{{ d.issue }}</strong>
+              <p>{{ d.rootCause }}</p>
+              <p class="diagnosis__impact">{{ d.impact }}</p>
+            </div>
+          }
+
+          @for (rec of r.recommendations; track rec.action) {
+            <div class="recommendation">
+              <p class="recommendation__action">{{ rec.action }}</p>
+              <p class="recommendation__outcome">Expected: {{ rec.expectedOutcome }}</p>
+              <span class="recommendation__confidence">Confidence: {{ rec.confidence | number: '1.0-2' }}</span>
+            </div>
+          }
+        }
+      </div>
+    }
+    @if (sending()) {
+      <div class="message message--assistant">
+        <mat-spinner diameter="18" />
+      </div>
+    }
+  </div>
+
+  <div class="suggestions">
+    @for (s of suggestions; track s) {
+      <button mat-stroked-button type="button" class="suggestion" (click)="ask(s)" [disabled]="sending()">{{ s }}</button>
+    }
+  </div>
+
+  <div class="composer">
+    <mat-form-field appearance="outline" class="composer__field">
+      <input
+        matInput
+        placeholder="Ask BOSS anything about your business..."
+        [ngModel]="draft()"
+        (ngModelChange)="draft.set($event)"
+        (keydown.enter)="ask()"
+      />
+    </mat-form-field>
+    <button mat-flat-button color="primary" (click)="ask()" [disabled]="sending() || !draft().trim()">
+      <mat-icon>send</mat-icon>
+    </button>
+  </div>
+</mat-card>

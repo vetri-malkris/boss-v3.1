@@ -1,0 +1,101 @@
+<mat-card class="panel">
+<span class="panel__title">Finance KPIs (Position / Profitability / Forecast / Capital)</span>
+<div class="metrics">
+  <mat-card class="metric" (click)="showTraceability('cashPosition')">
+    <span class="metric__label">Cash position</span>
+    <span class="metric__value">
+      @if (kpis().cashPosition != null) {
+        <app-compact-amount-display [value]="kpis().cashPosition!" />
+      } @else {
+        N/A
+      }
+    </span>
+  </mat-card>
+  <mat-card class="metric" (click)="showTraceability('workingCapital')">
+    <span class="metric__label">Working capital</span>
+    <span class="metric__value"
+      [class.metric__value--up]="kpis().workingCapital != null && kpis().workingCapital! >= 0"
+      [class.metric__value--down]="kpis().workingCapital != null && kpis().workingCapital! < 0">
+      @if (kpis().workingCapital != null) {
+        <app-compact-amount-display [value]="kpis().workingCapital!" />
+      } @else {
+        N/A
+      }
+    </span>
+  </mat-card>
+  <mat-card class="metric" (click)="showTraceability('currentRatio')">
+    <span class="metric__label">Current ratio</span>
+    <span class="metric__value">
+      @if (kpis().currentRatio != null) {
+        {{ kpis().currentRatio | number: '1.2-2' }}
+      } @else {
+        N/A
+      }
+    </span>
+  </mat-card>
+  <mat-card class="metric" (click)="showTraceability('grossMargin')">
+    <span class="metric__label">Gross margin</span>
+    <span class="metric__value">
+      @if (kpis().grossMargin != null) {
+        {{ kpis().grossMargin | number: '1.2-2' }}%
+      } @else {
+        N/A
+      }
+    </span>
+  </mat-card>
+  <mat-card class="metric" (click)="showTraceability('operatingProfit')">
+    <span class="metric__label">Operating profit</span>
+    <span class="metric__value"
+      [class.metric__value--up]="kpis().operatingProfit != null && kpis().operatingProfit! >= 0"
+      [class.metric__value--down]="kpis().operatingProfit != null && kpis().operatingProfit! < 0">
+      @if (kpis().operatingProfit != null) {
+        <app-compact-amount-display [value]="kpis().operatingProfit!" />
+      } @else {
+        N/A
+      }
+    </span>
+  </mat-card>
+  <mat-card class="metric" (click)="showTraceability('netProfit')">
+    <span class="metric__label">Net profit</span>
+    <span class="metric__value"
+      [class.metric__value--up]="kpis().netProfit != null && kpis().netProfit! >= 0"
+      [class.metric__value--down]="kpis().netProfit != null && kpis().netProfit! < 0">
+      @if (kpis().netProfit != null) {
+        <app-compact-amount-display [value]="kpis().netProfit!" />
+      } @else {
+        N/A
+      }
+    </span>
+  </mat-card>
+  <mat-card class="metric" (click)="showTraceability('netMargin')">
+    <span class="metric__label">Net margin</span>
+    <span class="metric__value">
+      @if (kpis().netMargin != null) {
+        {{ kpis().netMargin | number: '1.2-2' }}%
+      } @else {
+        N/A
+      }
+    </span>
+  </mat-card>
+  <mat-card class="metric" (click)="showTraceability('fundingRequirement')">
+    <span class="metric__label">Funding requirement</span>
+    <span class="metric__value">
+      @if (kpis().fundingRequirement != null) {
+        <app-compact-amount-display [value]="kpis().fundingRequirement!" />
+      } @else {
+        N/A
+      }
+    </span>
+  </mat-card>
+  <mat-card class="metric" (click)="showTraceability('debtExposure')">
+    <span class="metric__label">Debt exposure</span>
+    <span class="metric__value">
+      @if (kpis().debtExposure != null) {
+        <app-compact-amount-display [value]="kpis().debtExposure!" />
+      } @else {
+        N/A
+      }
+    </span>
+  </mat-card>
+</div>
+</mat-card>

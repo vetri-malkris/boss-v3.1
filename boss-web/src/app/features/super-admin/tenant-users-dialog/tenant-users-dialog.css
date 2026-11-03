@@ -1,0 +1,139 @@
+.dialog {
+  min-width: 420px;
+  max-width: 520px;
+}
+
+.error {
+  color: var(--neu-danger);
+  font-size: 0.85rem;
+  margin: 0 0 0.75rem;
+}
+
+.spinner-row {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem 0;
+}
+
+.empty {
+  color: var(--neu-text-muted);
+  font-size: 0.85rem;
+  padding: 1rem 0;
+}
+
+.users {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: var(--neu-radius-sm);
+  background: var(--neu-bg);
+  box-shadow: var(--neu-shadow-inset-sm);
+}
+
+.user__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.user__name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--neu-text);
+}
+
+.user__email {
+  font-size: 0.75rem;
+  color: var(--neu-text-muted);
+}
+
+.user__roles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.2rem;
+}
+
+.user__role-chip {
+  font-size: 0.68rem !important;
+  min-height: 20px !important;
+}
+
+.user__role-chip--inactive {
+  color: var(--neu-danger) !important;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.55rem 0.8rem;
+  background: var(--neu-bg);
+  border-radius: var(--neu-radius-sm);
+  box-shadow: var(--neu-shadow-inset-sm);
+}
+
+.field__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.field__label {
+  font-size: 0.78rem;
+  color: var(--neu-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.field__value {
+  display: flex;
+}
+
+.field__control {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--neu-text);
+  padding: 0;
+}
+
+.roles-select {
+  display: block;
+  width: 100%;
+  padding: 0.55rem 0.8rem;
+  background: var(--neu-bg);
+  border-radius: var(--neu-radius-sm);
+  box-shadow: var(--neu-shadow-inset-sm);
+  font-size: 0.95rem;
+  color: var(--neu-text);
+}
+
+.section-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--neu-text-muted);
+  margin: 0.25rem 0 0.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}

@@ -1,0 +1,83 @@
+:host {
+  display: block;
+}
+
+.panel {
+  padding: 1.1rem 1.25rem;
+  height: 100%;
+}
+
+.panel__title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--neu-text-secondary);
+}
+
+.panel__empty {
+  color: var(--neu-text-muted);
+  font-size: 0.85rem;
+  margin: 0.75rem 0;
+}
+
+.panel__note {
+  color: var(--neu-text-faint);
+  font-size: 0.75rem;
+  margin: 0.9rem 0 0;
+}
+
+.risks {
+  margin-top: 0.75rem;
+  background: transparent;
+}
+
+.risk {
+  background: rgba(0, 0, 0, 0.03) !important;
+  color: var(--neu-text) !important;
+  margin-bottom: 0.4rem;
+}
+
+.risk__title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--neu-text) !important;
+}
+
+.risk__title mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.risk--high .risk__title mat-icon {
+  color: var(--neu-danger);
+}
+
+.risk--medium .risk__title mat-icon {
+  color: var(--neu-warning);
+}
+
+.risk--low .risk__title mat-icon {
+  color: var(--neu-primary);
+}
+
+.risk__severity {
+  font-size: 0.75rem;
+  color: var(--neu-text-muted) !important;
+}
+
+.risk__details {
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+.risk__details dt {
+  color: var(--neu-text-muted);
+  margin-top: 0.5rem;
+}
+
+.risk__details dd {
+  margin: 0.15rem 0 0;
+  color: var(--neu-text-secondary);
+}
